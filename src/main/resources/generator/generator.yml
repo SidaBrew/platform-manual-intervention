@@ -1,0 +1,17 @@
+properties:
+  mapper:
+    entity:
+      addr: com.zenki.dataplus.pmi.dao.generated.entity
+    xml:
+      addr: genertator.mapper
+    interface:
+      addr: com.zenki.dataplus.pmi.dao.generated.mapper
+  table: blob_test
+  obj: BlobTest
+
+
+db:
+  addr: jdbc:mysql://localhost:3306/dmeo
+  name: root
+  password: 123456
+
