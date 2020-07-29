@@ -14,4 +14,9 @@ mybatis:
   type-aliases-package: com.zenki.dataplus.pmi.dao.generated.entity
 
 
+#jwt认证白名单
+com:
+  ruoyi:
+    project:
+      whiteList: /testWhiteList/hello,/testWhiteList/sida
 
