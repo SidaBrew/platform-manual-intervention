@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zenki.dataplus.pmi.mapper.UserMapper">
+
+    <resultMap type="com.zenki.dataplus.pmi.entity.User" id="UserMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="userPassword" column="user_password" jdbcType="VARCHAR"/>
+        <result property="nickname" column="nickname" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="phonenum" column="phonenum" jdbcType="VARCHAR"/>
+        <result property="sex" column="sex" jdbcType="VARCHAR"/>
+        <result property="address" column="address" jdbcType="VARCHAR"/>
+        <result property="birthday" column="birthday" jdbcType="TIMESTAMP"/>
+        <result property="isDelete" column="is_delete" jdbcType="VARCHAR"/>
+        <result property="gmt8Created" column="gmt8_created" jdbcType="TIMESTAMP"/>
+        <result property="gmt5Modified" column="gmt5_modified" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="UserMap">
+        select
+          id, username, user_password, nickname, email, phonenum, sex, address, birthday, is_delete, gmt8_created, gmt5_modified
+        from test.user
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="UserMap">
+        select
+          id, username, user_password, nickname, email, phonenum, sex, address, birthday, is_delete, gmt8_created, gmt5_modified
+        from test.user
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="UserMap">
+        select
+          id, username, user_password, nickname, email, phonenum, sex, address, birthday, is_delete, gmt8_created, gmt5_modified
+        from test.user
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="username != null and username != ''">
+                and username = #{username}
+            </if>
+            <if test="userPassword != null and userPassword != ''">
+                and user_password = #{userPassword}
+            </if>
+            <if test="nickname != null and nickname != ''">
+                and nickname = #{nickname}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+            <if test="phonenum != null and phonenum != ''">
+                and phonenum = #{phonenum}
+            </if>
+            <if test="sex != null and sex != ''">
+                and sex = #{sex}
+            </if>
+            <if test="address != null and address != ''">
+                and address = #{address}
+            </if>
+            <if test="birthday != null">
+                and birthday = #{birthday}
+            </if>
+            <if test="isDelete != null and isDelete != ''">
+                and is_delete = #{isDelete}
+            </if>
+            <if test="gmt8Created != null">
+                and gmt8_created = #{gmt8Created}
+            </if>
+            <if test="gmt5Modified != null">
+                and gmt5_modified = #{gmt5Modified}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into test.user(username, user_password, nickname, email, phonenum, sex, address, birthday, is_delete, gmt8_created, gmt5_modified)
+        values (#{username}, #{userPassword}, #{nickname}, #{email}, #{phonenum}, #{sex}, #{address}, #{birthday}, #{isDelete}, #{gmt8Created}, #{gmt5Modified})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update test.user
+        <set>
+            <if test="username != null and username != ''">
+                username = #{username},
+            </if>
+            <if test="userPassword != null and userPassword != ''">
+                user_password = #{userPassword},
+            </if>
+            <if test="nickname != null and nickname != ''">
+                nickname = #{nickname},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+            <if test="phonenum != null and phonenum != ''">
+                phonenum = #{phonenum},
+            </if>
+            <if test="sex != null and sex != ''">
+                sex = #{sex},
+            </if>
+            <if test="address != null and address != ''">
+                address = #{address},
+            </if>
+            <if test="birthday != null">
+                birthday = #{birthday},
+            </if>
+            <if test="isDelete != null and isDelete != ''">
+                is_delete = #{isDelete},
+            </if>
+            <if test="gmt8Created != null">
+                gmt8_created = #{gmt8Created},
+            </if>
+            <if test="gmt5Modified != null">
+                gmt5_modified = #{gmt5Modified},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from test.user where id = #{id}
+    </delete>
+
+</mapper>
